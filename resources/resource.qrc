@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="images">
+    <file>Generate-tables.png</file>
+    <file>Open-icon.png</file>
+    <file>stats.jpg</file>
+  </qresource>
+</RCC>
