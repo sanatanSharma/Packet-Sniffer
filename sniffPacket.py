@@ -1,6 +1,7 @@
 from scapy.all import *
 import sniffWindow
 from PyQt4.QtCore import *
+import databaseM
 
 class sniffThread(QThread):
 
@@ -28,23 +29,11 @@ class sniffThread(QThread):
             tcp_dport=pkt[TCP].dport
 
             l = [str(ip_src),str(ip_dst),str(tcp_sport),str(tcp_dport)]
-            # s = str(ip_src) + "   ->   " + str(ip_dst) + "        " + str(tcp_sport) + "                  "+ str(tcp_dport)
+            self.storeInDatabase(l)
             self.emit(SIGNAL("output(PyQt_PyObject)"),l)
-            # sniffWindow.pushEntry(str(ip_src),str(ip_dst))
-            # print str(ip_src) + "   ->   " + str(ip_dst) + "        " + str(tcp_sport) + "                  "+ str(tcp_dport)
-        # print "sd"
-        # http_packet = str(pkt)
-        # if http_packet.find(" "):
-        # 	f = open('log.txt',"a")
-        #     f.write(str(GET_print(pkt)))
-        
-    # def GET_print(packet1):
-    #     ret = "***************************************GET PACKET****************************************************\n"
-    #     ret += "\n".join(packet1.sprintf("{Raw:%Raw.load%}\n").split(r"\r\n"))
-    #     ret += "*****************************************************************************************************\n"
-    #     return ret
 
-        # hexdump(pkt)
-    # info = []
+    def storeInDatabase(self,l):
+        databaseM.addToTable(l)
+
 
     
