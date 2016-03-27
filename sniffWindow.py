@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'sniffWindow.ui'
-#
-# Created: Fri Mar  4 11:13:29 2016
-#      by: PyQt4 UI code generator 4.10.4
-#
-# WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 
@@ -33,16 +25,19 @@ class Ui_sniffWindow(object):
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.gridLayout = QtGui.QGridLayout()
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem, 2, 2, 1, 1)
+        self.label = QtGui.QLabel(self.centralwidget)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem1, 1, 2, 1, 1)
         self.label_4 = QtGui.QLabel(self.centralwidget)
         self.label_4.setEnabled(True)
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.gridLayout.addWidget(self.label_4, 0, 1, 1, 1)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem, 0, 2, 1, 1)
-        self.label_6 = QtGui.QLabel(self.centralwidget)
-        self.label_6.setEnabled(True)
-        self.label_6.setObjectName(_fromUtf8("label_6"))
-        self.gridLayout.addWidget(self.label_6, 2, 1, 1, 1)
+        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem2, 0, 2, 1, 1)
         self.label_2 = QtGui.QLabel(self.centralwidget)
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
@@ -53,17 +48,15 @@ class Ui_sniffWindow(object):
         self.label_5.setEnabled(True)
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.gridLayout.addWidget(self.label_5, 1, 1, 1, 1)
-        self.label = QtGui.QLabel(self.centralwidget)
-        self.label.setObjectName(_fromUtf8("label"))
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem1, 2, 2, 1, 1)
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem2, 1, 2, 1, 1)
+        self.label_6 = QtGui.QLabel(self.centralwidget)
+        self.label_6.setEnabled(True)
+        self.label_6.setObjectName(_fromUtf8("label_6"))
+        self.gridLayout.addWidget(self.label_6, 2, 1, 1, 1)
         self.verticalLayout.addLayout(self.gridLayout)
         self.tableWidget = QtGui.QTableWidget(self.centralwidget)
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
         self.tableWidget.setColumnCount(4)
+        self.tableWidget.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
@@ -74,12 +67,16 @@ class Ui_sniffWindow(object):
         self.tableWidget.setHorizontalHeaderItem(3, item)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(120)
         self.tableWidget.horizontalHeader().setMinimumSectionSize(60)
-        self.tableWidget.horizontalHeader().setStretchLastSection(False)
-        self.tableWidget.verticalHeader().setDefaultSectionSize(30)
         self.verticalLayout.addWidget(self.tableWidget)
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.pushButton = QtGui.QPushButton(self.centralwidget)
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
-        self.verticalLayout.addWidget(self.pushButton)
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
+        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
+        self.horizontalLayout.addWidget(self.pushButton_2)
+        self.verticalLayout.addLayout(self.horizontalLayout)
         sniffWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(sniffWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -89,14 +86,13 @@ class Ui_sniffWindow(object):
         QtCore.QMetaObject.connectSlotsByName(sniffWindow)
 
     def retranslateUi(self, sniffWindow, ip, txt, public_ip):
-        sniffWindow.setWindowTitle(_translate("sniffWindow", "MainWindow", None))
+        sniffWindow.setWindowTitle(_translate("sniffWindow", "Sniffing", None))
         self.label_4.setText(_translate("sniffWindow", public_ip, None))
         self.label_6.setText(_translate("sniffWindow", txt, None))
         self.label_2.setText(_translate("sniffWindow", "Local IP", None))
         self.label_3.setText(_translate("sniffWindow", "Interface", None))
         self.label_5.setText(_translate("sniffWindow", ip , None))
         self.label.setText(_translate("sniffWindow", "Public IP", None))
-        self.tableWidget.setSortingEnabled(True)
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("sniffWindow", "Source IP", None))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -105,12 +101,8 @@ class Ui_sniffWindow(object):
         item.setText(_translate("sniffWindow", "TCP Source Port", None))
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("sniffWindow", "TCP Dest. Port", None))
-        __sortingEnabled = self.tableWidget.isSortingEnabled()
-        self.tableWidget.setSortingEnabled(False)
-        self.tableWidget.setSortingEnabled(__sortingEnabled)
-        self.pushButton.setText(_translate("sniffWindow", "Start Sniffin'!", None))
-
-
+        self.pushButton.setText(_translate("sniffWindow", "Start!", None))
+        self.pushButton_2.setText(_translate("sniffWindow", "Stop!", None))
 
     def pushEntry(self, l):
         rows = self.tableWidget.rowCount()

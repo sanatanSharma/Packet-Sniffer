@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'statsWindow.ui'
 #
-# Created: Mon Mar  7 23:04:06 2016
+# Created: Wed Mar  9 22:07:59 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,7 +30,7 @@ class Ui_statsWindow(object):
         self.centralwidget = QtGui.QWidget(statsWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.dateEdit = QtGui.QDateEdit(self.centralwidget)
-        self.dateEdit.setGeometry(QtCore.QRect(200, 90, 111, 31))
+        self.dateEdit.setGeometry(QtCore.QRect(220, 90, 111, 31))
         self.dateEdit.setObjectName(_fromUtf8("dateEdit"))
         self.label = QtGui.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(120, 100, 81, 17))
@@ -41,6 +41,12 @@ class Ui_statsWindow(object):
         self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(250, 170, 98, 27))
         self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
+        self.label_2 = QtGui.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(50, 50, 151, 17))
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.comboBox = QtGui.QComboBox(self.centralwidget)
+        self.comboBox.setGeometry(QtCore.QRect(210, 50, 181, 27))
+        self.comboBox.setObjectName(_fromUtf8("comboBox"))
         statsWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(statsWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -50,8 +56,9 @@ class Ui_statsWindow(object):
         QtCore.QMetaObject.connectSlotsByName(statsWindow)
 
     def retranslateUi(self, statsWindow):
-        statsWindow.setWindowTitle(_translate("statsWindow", "Statistics", None))
+        statsWindow.setWindowTitle(_translate("statsWindow", "MainWindow", None))
         self.label.setText(_translate("statsWindow", "Enter Date:", None))
         self.pushButton.setText(_translate("statsWindow", "Show Database", None))
         self.pushButton_2.setText(_translate("statsWindow", "Plot", None))
+        self.label_2.setText(_translate("statsWindow", "Choose Your Interface:", None))
 

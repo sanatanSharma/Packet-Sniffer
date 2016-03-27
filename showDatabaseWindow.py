@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'showDatabase.ui'
-#
-# Created: Tue Mar  8 00:52:39 2016
-#      by: PyQt4 UI code generator 4.10.4
-#
-# WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 import MySQLdb
@@ -61,10 +53,10 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
 
-    def showPackets(self, date):
+    def showPackets(self, date, interface):
         db = MySQLdb.connect("localhost","root","1234","log")
         cursor = db.cursor()
-        sql = "SELECT * FROM packets WHERE `Date`='%s'" % (date)
+        sql = "SELECT * FROM packets WHERE `Date`='%s' AND `interface`='%s'" % (date, interface)
         cursor.execute(sql)
 
         for row in cursor:
@@ -74,9 +66,8 @@ class Ui_MainWindow(object):
         db.close()
 
 
-
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Database", None))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Source IP", None))
         item = self.tableWidget.horizontalHeaderItem(1)

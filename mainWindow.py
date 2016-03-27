@@ -1,16 +1,8 @@
-    # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'untitled.ui'
-#
-# Created: Thu Feb 25 16:52:14 2016
-#      by: PyQt4 UI code generator 4.10.4
-#
-# WARNING! All changes made in this file will be lost!
 import sys
 from PyQt4 import QtCore, QtGui
 import netifaces
 import resource_rc
-# import sniffWindow
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -61,10 +53,16 @@ class Ui_MainWindow(object):
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
         self.actionStatistics = QtGui.QAction(MainWindow)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/images/stats.jpg")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/images/Generate-tables.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionStatistics.setIcon(icon)
         self.actionStatistics.setObjectName(_fromUtf8("actionStatistics"))
+        self.actionPlot = QtGui.QAction(MainWindow)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(_fromUtf8(":/images/stats.jpg")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionPlot.setIcon(icon1)
+        self.actionPlot.setObjectName(_fromUtf8("actionPlot"))
         self.toolBar.addAction(self.actionStatistics)
+        self.toolBar.addAction(self.actionPlot)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -76,6 +74,8 @@ class Ui_MainWindow(object):
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar", None))
         self.actionStatistics.setText(_translate("MainWindow", "Statistics", None))
         self.actionStatistics.setToolTip(_translate("MainWindow", "Show Databases", None))
+        self.actionPlot.setText(_translate("MainWindow", "Plot", None))
+        self.actionPlot.setToolTip(_translate("MainWindow", "Plot The Stats", None))
 
 
     def setOptions(self):

@@ -28,12 +28,15 @@ class sniffThread(QThread):
             tcp_sport=pkt[TCP].sport
             tcp_dport=pkt[TCP].dport
 
-            l = [str(ip_src),str(ip_dst),str(tcp_sport),str(tcp_dport)]
+            l = [str(ip_src),str(ip_dst),str(tcp_sport),str(tcp_dport), str(self.interface)]
             self.storeInDatabase(l)
             self.emit(SIGNAL("output(PyQt_PyObject)"),l)
 
     def storeInDatabase(self,l):
         databaseM.addToTable(l)
+
+    def stop(self):
+        self.terminate()
 
 
     

@@ -1,18 +1,22 @@
-from PyQt4 import QtGui # Import the PyQt4 module we'll need
+from PyQt4 import QtGui 
 from PyQt4.QtCore import *
 from netifaces import AF_INET
+from requests import get
+
 import time
 import sys 
-from requests import get# We need sys so that we can pass argv to QApplication
+
 
 import mainWindow
 import sniffWindow
 import sniffPacket 
-import statsWindow
+import databaseWindow
 import showDatabaseWindow
+import plotWindow
+import databaseM
+import plot
 
-import netifaces # This file holds our MainWindow and all design related things
-              # it also keeps events etc that we defined in Qt Designer           # It sets up layout and widgets that are defined
+import netifaces 
 
 class Win1(QtGui.QMainWindow, mainWindow.Ui_MainWindow):
     def __init__(self):
@@ -20,11 +24,13 @@ class Win1(QtGui.QMainWindow, mainWindow.Ui_MainWindow):
         self.setupUi(self)
         self.setOptions()
         # self.public_ip = get('https://api.ipify.org').text
-        self.public_ip = "dbcbh"
+        self.public_ip = "dc"
         self.pushButton.clicked.connect(self.handleButton)
         self.actionStatistics.triggered.connect(self.handleActionStats)
+        self.actionPlot.triggered.connect(self.handleActionPlot)
         self.window2 = None
         self.window3 = None
+        self.window4 = None
         
     def handleButton(self):
         txt = self.comboBox.currentText()
@@ -38,6 +44,11 @@ class Win1(QtGui.QMainWindow, mainWindow.Ui_MainWindow):
             self.window3 = Win3()
         self.window3.show()
 
+    def handleActionPlot(self):
+        if self.window4 is None:
+            self.window4 = Win5()
+        self.window4.show()
+
 class Win2(QtGui.QMainWindow, sniffWindow.Ui_sniffWindow):
 
     def __init__(self, IP, text, public_ip):
@@ -47,13 +58,10 @@ class Win2(QtGui.QMainWindow, sniffWindow.Ui_sniffWindow):
         self.public_ip = public_ip
         self.thread = sniffPacket.sniffThread()
         self.setupUi(self, self.Ip, self.txt, self.public_ip)
-        # self.connect(self.thread, SIGNAL("finished()"), self.updateUi)
-        # self.connect(self.thread, SIGNAL("terminated()"), self.updateUi)
 
         self.connect(self.thread, SIGNAL("output(PyQt_PyObject)"), self.printScreen)
         self.connect(self.pushButton, SIGNAL("clicked()"), self.handleButton)
-        
-        # self.pushButton.clicked.connect(self.handleButton)
+        self.connect(self.pushButton_2, SIGNAL("clicked()"), self.handleTermination)
 
     def handleButton(self):
         self.thread.render(self.Ip, self.txt)
@@ -61,23 +69,28 @@ class Win2(QtGui.QMainWindow, sniffWindow.Ui_sniffWindow):
     def printScreen(self,l):
         self.pushEntry(l)
 
+    def handleTermination(self):
+        self.thread.stop()
+
     
 
-class Win3(QtGui.QMainWindow, statsWindow.Ui_statsWindow):
+class Win3(QtGui.QMainWindow, databaseWindow.Ui_databaseWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
         self.setupUi(self)
+        self.setOptions()
         self.pushButton.clicked.connect(self.handleButton)
         self.window2 = None
 
     def handleButton(self):
+        interface = self.comboBox.currentText()
         temp = self.dateEdit.date()
         date = temp.toPyDate() 
         print date
         if self.window2 is None:
             self.window2 = Win4()
         self.window2.show()
-        self.window2.showPackets(date)
+        self.window2.showPackets(date, interface)
 
 
 class Win4(QtGui.QMainWindow, showDatabaseWindow.Ui_MainWindow):
@@ -86,6 +99,19 @@ class Win4(QtGui.QMainWindow, showDatabaseWindow.Ui_MainWindow):
         self.setupUi(self)
 
 
+class Win5(QtGui.QMainWindow, plotWindow.Ui_plotWindow):
+    def __init__(self):
+        QtGui.QMainWindow.__init__(self)
+        self.setupUi(self)
+        self.setOptions()
+        self.pushButton.clicked.connect(self.handleButton)
+        self.window2 = None
+
+    def handleButton(self):
+        interface = self.comboBox.currentText()
+        temp = self.dateEdit.date()
+        date = temp.toPyDate()
+        plot.connectDatabase2(date, interface)
 
 def main():
     app = QtGui.QApplication(sys.argv)
